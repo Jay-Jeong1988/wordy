@@ -4,9 +4,10 @@ var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  fs.readFile("./server/data/example.txt", 'utf8', (err, data) => {
+  fs.readFile("./data/example.txt", 'utf8', (err, data) => {
     res.render('index', { title: 'Wordy', contents: data });
   })
+
 });
 
 module.exports = router;
