@@ -64,12 +64,14 @@ router.get('/:wId/blanks/:index', (req, res) => {
     })
 })
 
-router.get('/blanks/:bId/destroy', (req, res) => {
-    Blank.findOneAndDelete({_id: req.params.bId}, function(err, result) {
+router.get('/:wId/blanks/:index/destroy', (req, res) => {
+    Blank.findOneAndDelete({workspaceId: req.params.wId, index: req.params.index}, function(err, result) {
         if (err) return console.error(err);
         console.log("successfully deleted a blank");
+        console.log(result)
         res.status(200).json({
-            msg: "successfully deleted a blank"
+            msg: "successfully deleted a blank",
+            result: result
         })
     })
 })
