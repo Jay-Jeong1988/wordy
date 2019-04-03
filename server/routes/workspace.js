@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/create', (req, res) => {
     let ws = new Workspace(req.body);
-    if (!ws.title) ws.title = "no title";
+    if (!ws.title) ws.title = "제목 없음";
     ws.save().then(instance => {
         res.status(200).json({
             msg: "successfully saved a document",
@@ -32,9 +32,41 @@ router.post('/create', (req, res) => {
         console.log(instance);
     }).catch(error => {
         res.status(500).json({
-            error: error
+            msg: error.message
         })
         console.log(error);
+    })
+})
+
+router.post('/:wId/update', (req, res) => {
+    Workspace.findById(req.params.wId, function (err, workspace) {
+        workspace.contents = req.body.contents;
+        workspace.length = req.body.contents.length;
+        workspace.lastSavedAt = Date.now();
+        workspace.lastIndex = req.body.lastIndex;
+        workspace.save().then(instance => {
+            console.log("workspace has been updated");
+            res.status(200).json({
+                msg: "workspace has been updated"
+            });
+        }).catch(error => {
+            res.status(500).json({
+                error: error
+            })
+            console.log(error);
+        })
+    })
+})
+
+router.get('/:wId/destroy', (req, res) => {
+    Workspace.findByIdAndDelete(req.params.wId, function(err, result) {
+        if (err) return console.error(err);
+        console.log("successfully deleted a workspace");
+        console.log(result)
+        res.status(200).json({
+            msg: "successfully deleted a workspace",
+            result: result
+        })
     })
 })
 
@@ -72,6 +104,17 @@ router.get('/:wId/blanks/:index/destroy', (req, res) => {
         res.status(200).json({
             msg: "successfully deleted a blank",
             result: result
+        })
+    })
+})
+
+router.get('/:wId/blanks', (req, res) => {
+    Blank.find({workspaceId: req.params.wId}, function (err, blanks) {
+        if (err) return console.error(err);
+        console.log("successfully loaded blanks for workspace id:" + req.params.wId);
+        res.status(200).json({
+            msg: "successfully loaded blanks for workspace id: " + req.params.wId,
+            result: blanks
         })
     })
 })

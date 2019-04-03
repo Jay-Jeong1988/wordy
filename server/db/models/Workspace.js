@@ -2,10 +2,11 @@ let mongoose = require('mongoose');
 
 let workspaceSchema = new mongoose.Schema({
     title: String,
-    length: {type: Number, default: 0, min: 0},
+    length: {type: Number, default: 0, min: 0, max: 14000},
     contents: String,
     createdAt: {type: Date, default: Date.now},
     lastSavedAt: {type: Date, default: Date.now},
+    lastIndex: {type: Number, default: 0, min: 0}
 })
 
 workspaceSchema.virtual('detail').get(function() {
