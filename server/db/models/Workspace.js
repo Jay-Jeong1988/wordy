@@ -6,7 +6,8 @@ let workspaceSchema = new mongoose.Schema({
     contents: String,
     createdAt: {type: Date, default: Date.now},
     lastSavedAt: {type: Date, default: Date.now},
-    lastIndex: {type: Number, default: 0, min: 0}
+    lastIndex: {type: Number, default: 0, min: 0},
+    userId: String
 })
 
 workspaceSchema.virtual('detail').get(function() {

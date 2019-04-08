@@ -7,7 +7,7 @@ const Blank = require('../db/models/Blank');
 router.get('/', (req, res) => {
     Workspace.find(function (err, workspaces) {
         if (err) return console.error(err);
-        res.json(workspaces);
+        res.status(200).json(workspaces);
     })
 })
 
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/create', (req, res) => {
     let ws = new Workspace(req.body);
-    if (!ws.title) ws.title = "제목 없음";
+    if (!ws.title) ws.title = "No Title";
     ws.save().then(instance => {
         res.status(200).json({
             msg: "successfully saved a document",
