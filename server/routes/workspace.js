@@ -4,8 +4,8 @@ var db = require('../db/db');
 const Workspace = require('../db/models/Workspace');
 const Blank = require('../db/models/Blank');
 
-router.get('/', (req, res) => {
-    Workspace.find(function (err, workspaces) {
+router.get('/:userId/ws', (req, res) => {
+    Workspace.find({userId: req.params.userId}, function (err, workspaces) {
         if (err) return console.error(err);
         res.status(200).json(workspaces);
     })
@@ -15,7 +15,6 @@ router.get('/:id', (req, res) => {
     Workspace.findById(req.params.id, function (err, workspace) {
         if (err) return console.error(err);
         console.log("successfully loaded a data");
-        console.log(workspace);
         res.json(workspace);
     })
 })
@@ -29,7 +28,6 @@ router.post('/create', (req, res) => {
             created: instance
         });
         console.log('successfully saved a document');
-        console.log(instance);
     }).catch(error => {
         res.status(500).json({
             msg: error.message
@@ -62,7 +60,6 @@ router.get('/:wId/destroy', (req, res) => {
     Workspace.findByIdAndDelete(req.params.wId, function(err, result) {
         if (err) return console.error(err);
         console.log("successfully deleted a workspace");
-        console.log(result)
         res.status(200).json({
             msg: "successfully deleted a workspace",
             result: result
