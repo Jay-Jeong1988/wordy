@@ -7,5 +7,6 @@ module.exports = {
       host: 'localhost',
       hot: true,
       disableHostCheck: true,
+      port: 5000
     },
   };
