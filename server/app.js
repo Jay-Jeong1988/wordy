@@ -9,9 +9,9 @@ var usersRouter = require('./routes/user');
 var workspaceRouter = require('./routes/workspace');
 
 var app = express();
-
+var host = window.location.hostname
 app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.header("Access-Control-Allow-Origin", "http://" + host + ":5000");
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
