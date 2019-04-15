@@ -4,6 +4,7 @@
             <img src="../assets/images/previous.svg"/>
             <h5>Back</h5>
         </button>
+        <slot></slot>
     </div>
 </template>
 <script>
@@ -23,6 +24,9 @@
         top: 3.5em;
         left: 0;
         background-color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     .back {
         border: none;

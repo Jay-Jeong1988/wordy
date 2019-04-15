@@ -3,15 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var url = require('url');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var workspaceRouter = require('./routes/workspace');
 
 var app = express();
-var host = window.location.hostname
+
 app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://" + host + ":5000");
+  res.header("Access-Control-Allow-Origin", "http://localhost:5000");
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });

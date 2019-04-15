@@ -1,10 +1,14 @@
 <template>
   <main class="workspace">
-    <BackButton></BackButton>
+    <BackButton>
+      <button @click="edit" class="edit btn btn-outline-success">
+        <p style="line-height: normal">{{editable ? "Done" : "Edit"}}</p>
+      </button>
+    </BackButton>
     <div class="container">
       <h1>{{workspace.title}}</h1>
       <div class="contents">
-        <p @click="toggleWord" v-html="workspace.contents" @input="preserveData" contenteditable="true"></p>
+        <p @click="toggleWord" v-html="workspace.contents" @input="preserveData"></p>
       </div>
     </div>
   </main>
@@ -20,6 +24,17 @@ export default {
   },
   components: {BackButton},
   methods: {
+    edit () {
+      const contentsContainer = document.querySelector('.contents > p');
+      if (contentsContainer.getAttribute("contenteditable")) {
+        contentsContainer.setAttribute("contenteditable", false)
+        this.editable = false
+      }
+      else {
+        contentsContainer.setAttribute("contenteditable", true)
+        this.editable = true
+      }
+    },
     preserveData: function(event) {
       //mimic workspace for preventing the cursor to get its position reset everytime the data is changed
       let virtualWorkspace = {contents: event.target.innerHTML, lastIndex: this.workspace.lastIndex};
@@ -29,7 +44,6 @@ export default {
     },
     toggleWord: function(event){
       const sel = window.getSelection();
-      console.log(sel.getRangeAt(0))
       const textRead = sel.toString();
       this.clicks++ 
       //single clicked
@@ -99,7 +113,8 @@ export default {
       },
       delay: 500,
       clicks: 0,
-      timer: null
+      timer: null,
+      editable: false
     }
   },
   created () {
@@ -111,6 +126,10 @@ export default {
 </script>
 
 <style scoped>
+  .edit {
+    height: 2em;
+    margin: 1.5em;
+  }
   .workspace {
     margin-top: 9em;
   }
