@@ -21,12 +21,13 @@
     .backButton {
         width: 100vw;
         position: fixed;
-        top: 3.5em;
+        top: 3em;
         left: 0;
         background-color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        z-index: 1;
     }
     .back {
         border: none;
