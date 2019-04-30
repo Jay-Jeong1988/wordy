@@ -67,9 +67,9 @@ export default {
               let blank = {};
               let inc = this.workspace.lastIndex++;
               const textNode = document.createTextNode(blankUtil.convertToBlank(text));
-              const indexNode = blankUtil.createIndexNode(inc);
+              // const indexNode = blankUtil.createIndexNode(inc);
               
-              blankUtil.replaceWithBlankNode(range, textNode, indexNode);
+              blankUtil.replaceWithBlankNode(range, textNode, inc);
               this.workspace.contents = document.querySelector('.contents > p').innerHTML;  
               api.Card.update(this.workspace._id, this.workspace).then(res => {
                 console.log(res.msg);
@@ -89,9 +89,9 @@ export default {
               const textNode = document.createTextNode(text);
               range.insertNode(textNode);
               this.workspace.contents = document.querySelector('.contents > p').innerHTML;  
-              api.Card.update(this.workspace._id, this.workspace).then(res => {
-                console.log(res.msg);
-              })
+              // api.Card.update(this.workspace._id, this.workspace).then(res => {
+              //   console.log(res.msg);
+              // })
             })
           }
           clearTimeout(this.timer);
