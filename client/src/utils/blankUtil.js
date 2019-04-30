@@ -25,7 +25,7 @@ export const blankUtil = {
         return textForDisplay;
     },
     isTextOnly (text) {
-        return !(/[`@!~#$%^&,.\/\-\s*()_=+\[\]{}?<>:;""'']/g).test(text) && !!text.replace(/[0-9]/g, "");
+        return !(/[`@!~#$%^&,.\/\-*()_=+\[\]{}?<>:;""'']/g).test(text) && !!text.replace(/[0-9]/g, "");
     },
     replaceWithBlankNode (range, textNode, indexNode) {
         let node = document.createElement("span");

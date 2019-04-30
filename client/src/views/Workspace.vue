@@ -139,8 +139,6 @@ export default {
     text-align: start;
     width: 90vw;
     min-height: 90vh;
-    background-image: url('../assets/images/ws_background.jpg');
-    filter: brightness(150%);
   }
   small {
     font-size: 0.3em;
@@ -148,6 +146,7 @@ export default {
   }
   .contents {
     white-space: pre-wrap;
+    font-weight: bold;
   }
   p[contenteditable="true"] {
     outline: none;

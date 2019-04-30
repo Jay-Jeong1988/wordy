@@ -1,4 +1,4 @@
-const BASE_URL = "http://35.180.192.169:4000/api";
+const BASE_URL = window.location.hostname === "localhost" ? "http://localhost:4000/api" : "http://35.180.192.169:4000/api";
 
 export const api = {
     Card: {
