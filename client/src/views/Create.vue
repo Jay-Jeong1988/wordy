@@ -10,7 +10,7 @@
                         <h5> {{ file.name }}</h5>
                         <p>File Type: {{ file.type }}</p>
                         <p>Length: {{ file.size }} characters</p>
-                        <small v-if="file.size > 60000" style="color: red">Max=60,000</small>
+                        <small v-if="file.size > 80000" style="color: red">Max=80,000</small>
                     </div>
                 </div>
                 <input class="form-control" type="text" placeholder="Title" v-model="workspace.title"/>
@@ -88,7 +88,7 @@
             saveWorkspace () {
                 if (localStorage.getItem('user')) this.workspace.userId = JSON.parse(localStorage.getItem('user'))._id
                 if (this.file != null) {
-                    this.file.size > 60000 ? 
+                    this.file.size > 80000 ? 
                     alert("Text length is too long.") :
                     api.Card.create(this.workspace).then(card => {
                         console.log(card.msg);

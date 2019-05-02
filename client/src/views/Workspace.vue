@@ -1,9 +1,14 @@
 <template>
   <main class="workspace">
     <BackButton>
-      <button @click="edit" class="edit btn btn-outline-success">
-        <p style="line-height: normal">{{editable ? "Done" : "Edit"}}</p>
-      </button>
+      <div>
+        <button @click="edit" class="edit btn btn-outline-success">
+          <p style="line-height: normal">{{editable ? "Done" : "Edit"}}</p>
+        </button>
+        <button v-if="editable" @click="highlight" class="highlight btn btn-outline-warning">
+          <p style="line-height: normal">Highlight</p>
+        </button>
+      </div>
     </BackButton>
     <div class="container">
       <h1>{{workspace.title}}</h1>
@@ -24,9 +29,12 @@ export default {
   },
   components: {BackButton},
   methods: {
+    highlight () {
+      document.execCommand("hiliteColor", false, "#FFEC1F");
+    },
     edit () {
       const contentsContainer = document.querySelector('.contents > p');
-      if (contentsContainer.getAttribute("contenteditable")) {
+      if (contentsContainer.getAttribute("contenteditable") === "true") {
         contentsContainer.setAttribute("contenteditable", false)
         this.editable = false
       }
@@ -150,5 +158,9 @@ export default {
   }
   p[contenteditable="true"] {
     outline: none;
+  }
+  .highlight {
+    height: 2em;
+    margin: 1.5em;
   }
 </style>
